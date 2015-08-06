@@ -45,9 +45,10 @@
   },
   "sidebar": {
     "heading": {
+      "MENU": "Menu",
       "NAVIGATION": "Main Navigation",
       "FEATURES": "Core Features",
-      "DOCUMENTATION": "Documentation"
+      "SELF_SERVICE": "Self Service"
     },
     "search": {
       "PLACEHOLDER": "Search..."
@@ -57,22 +58,35 @@
       	"MAIN": "Dashboard"
       },
       "element": {
-      	"MAIN": "UI Elements",
-        "ELEMENTS": "Elements",
-        "BUTTONS": "Buttons",
-        "LINKS": "Link Effects",
-        "FONTAWESOME" : "Font Awesome Icons",
-        "LINEARICONS" : "Linear Icons",
-        "MODALS" : "Modals",
-        "TOGGLE" : "Toggle",
-        "TABS" : "Tabs & Accordions",
-        "PANELS" : "Panels",
-        "NOTIFICATIONS": "Notifications",
-        "SLIDERS": "Sliders",
-        "TREEVIEW": "TreeView",
-        "MEDIA": "Media",
-        "NESTABLE": "Nestable List",
-        "TYPOGRAPHY": "Typography"
+      	"PRODUCTS": "Products",
+        "USERS": "Users",
+        "ORDERS": "Orders",
+        "CATEGORIES" : "Categories",
+        "REPORTS": "Reports"
+      },
+      "products": {
+        "view_products": "View Products",
+        "add_product": "Add Product",
+        "report1": "Report 1",
+        "report2": "Report 2",
+        "report3": "Report 3"
+      },
+      "categories": {
+        "add_categories": "Add Categories"
+      },
+      "orders": {
+        "view_orders": "View Orders",
+        "report1": "Report 1",
+        "report2": "Report 2",
+        "report3": "Report 3"
+      },
+
+      "users": {
+        "view_users": "View Users",
+        "add_user": "Add User",
+        "report1": "Report 1",
+        "report2": "Report 2",
+        "report3": "Report 3"
       },
       "tables": {
         "MAIN": "Tables",
