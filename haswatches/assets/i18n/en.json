@@ -118,7 +118,8 @@
         "TIMELINE": "Timeline",
         "CALENDAR": "Calendar",
         "MESSAGES": "Messages",
-        "BLANKPAGE": "Starter Page"
+        "ADDPRODUCT": "New Product",
+        "VIEWPRODUCTS": "View Products"
       },
       "utilities": {
         "MAIN": "Utilities",

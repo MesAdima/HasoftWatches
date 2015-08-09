@@ -41,217 +41,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Dashboard'
         }
-    }).state('app.ui', {
-        url: '/ui',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'UI Elements',
-        ncyBreadcrumb: {
-            label: 'UI Elements'
-        }
-    }).state('app.ui.elements', {
-        url: '/elements',
-        templateUrl: "assets/views/ui_elements.html",
-        title: 'Elements',
-        icon: 'ti-layout-media-left-alt',
-        ncyBreadcrumb: {
-            label: 'Elements'
-        }
-    }).state('app.ui.buttons', {
-        url: '/buttons',
-        templateUrl: "assets/views/ui_buttons.html",
-        title: 'Buttons',
-        resolve: loadSequence('spin', 'ladda', 'angular-ladda', 'laddaCtrl'),
-        ncyBreadcrumb: {
-            label: 'Buttons'
-        }
-    }).state('app.ui.links', {
-        url: '/links',
-        templateUrl: "assets/views/ui_links.html",
-        title: 'Link Effects',
-        ncyBreadcrumb: {
-            label: 'Link Effects'
-        }
-    }).state('app.ui.icons', {
-        url: '/icons',
-        templateUrl: "assets/views/ui_icons.html",
-        title: 'Font Awesome Icons',
-        ncyBreadcrumb: {
-            label: 'Font Awesome Icons'
-        },
-        resolve: loadSequence('iconsCtrl')
-    }).state('app.ui.lineicons', {
-        url: '/line-icons',
-        templateUrl: "assets/views/ui_line_icons.html",
-        title: 'Linear Icons',
-        ncyBreadcrumb: {
-            label: 'Linear Icons'
-        },
-        resolve: loadSequence('iconsCtrl')
-    }).state('app.ui.modals', {
-        url: '/modals',
-        templateUrl: "assets/views/ui_modals.html",
-        title: 'Modals',
-        ncyBreadcrumb: {
-            label: 'Modals'
-        },
-        resolve: loadSequence('asideCtrl')
-    }).state('app.ui.toggle', {
-        url: '/toggle',
-        templateUrl: "assets/views/ui_toggle.html",
-        title: 'Toggle',
-        ncyBreadcrumb: {
-            label: 'Toggle'
-        }
-    }).state('app.ui.tabs_accordions', {
-        url: '/accordions',
-        templateUrl: "assets/views/ui_tabs_accordions.html",
-        title: "Tabs & Accordions",
-        ncyBreadcrumb: {
-            label: 'Tabs & Accordions'
-        },
-        resolve: loadSequence('vAccordionCtrl')
-    }).state('app.ui.panels', {
-        url: '/panels',
-        templateUrl: "assets/views/ui_panels.html",
-        title: 'Panels',
-        ncyBreadcrumb: {
-            label: 'Panels'
-        }
-    }).state('app.ui.notifications', {
-        url: '/notifications',
-        templateUrl: "assets/views/ui_notifications.html",
-        title: 'Notifications',
-        ncyBreadcrumb: {
-            label: 'Notifications'
-        },
-        resolve: loadSequence('toasterCtrl', 'sweetAlertCtrl')
-    }).state('app.ui.treeview', {
-        url: '/treeview',
-        templateUrl: "assets/views/ui_tree.html",
-        title: 'TreeView',
-        ncyBreadcrumb: {
-            label: 'Treeview'
-        },
-        resolve: loadSequence('angularBootstrapNavTree', 'treeCtrl')
-    }).state('app.ui.media', {
-        url: '/media',
-        templateUrl: "assets/views/ui_media.html",
-        title: 'Media',
-        ncyBreadcrumb: {
-            label: 'Media'
-        }
-    }).state('app.ui.nestable', {
-        url: '/nestable2',
-        templateUrl: "assets/views/ui_nestable.html",
-        title: 'Nestable List',
-        ncyBreadcrumb: {
-            label: 'Nestable List'
-        },
-        resolve: loadSequence('jquery-nestable-plugin', 'ng-nestable', 'nestableCtrl')
-    }).state('app.ui.typography', {
-        url: '/typography',
-        templateUrl: "assets/views/ui_typography.html",
-        title: 'Typography',
-        ncyBreadcrumb: {
-            label: 'Typography'
-        }
-    }).state('app.table', {
-        url: '/table',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'Tables',
-        ncyBreadcrumb: {
-            label: 'Tables'
-        }
-    }).state('app.table.basic', {
-        url: '/basic',
-        templateUrl: "assets/views/table_basic.html",
-        title: 'Basic Tables',
-        ncyBreadcrumb: {
-            label: 'Basic'
-        }
-    }).state('app.table.responsive', {
-        url: '/responsive',
-        templateUrl: "assets/views/table_responsive.html",
-        title: 'Responsive Tables',
-        ncyBreadcrumb: {
-            label: 'Responsive'
-        }
-    }).state('app.table.data', {
-        url: '/data',
-        templateUrl: "assets/views/table_data.html",
-        title: 'ngTable',
-        ncyBreadcrumb: {
-            label: 'ngTable'
-        },
-        resolve: loadSequence('ngTable', 'ngTableCtrl')
-    }).state('app.table.export', {
-        url: '/export',
-        templateUrl: "assets/views/table_export.html",
-        title: 'Table'
-    }).state('app.form', {
-        url: '/form',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'Forms',
-        ncyBreadcrumb: {
-            label: 'Forms'
-        }
-    }).state('app.form.elements', {
-        url: '/elements',
-        templateUrl: "assets/views/form_elements.html",
-        title: 'Forms Elements',
-        ncyBreadcrumb: {
-            label: 'Elements'
-        },
-        resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'selectCtrl')
-    }).state('app.form.xeditable', {
-        url: '/xeditable',
-        templateUrl: "assets/views/form_xeditable.html",
-        title: 'Angular X-Editable',
-        ncyBreadcrumb: {
-            label: 'X-Editable'
-        },
-        resolve: loadSequence('xeditable', 'checklist-model', 'xeditableCtrl')
-    }).state('app.form.texteditor', {
-        url: '/editor',
-        templateUrl: "assets/views/form_text_editor.html",
-        title: 'Text Editor',
-        ncyBreadcrumb: {
-            label: 'Text Editor'
-        },
-        resolve: loadSequence('ckeditor-plugin', 'ckeditor', 'ckeditorCtrl')
-    }).state('app.form.wizard', {
-        url: '/wizard',
-        templateUrl: "assets/views/form_wizard.html",
-        title: 'Form Wizard',
-        ncyBreadcrumb: {
-            label: 'Wizard'
-        },
-        resolve: loadSequence('wizardCtrl')
-    }).state('app.form.validation', {
-        url: '/validation',
-        templateUrl: "assets/views/form_validation.html",
-        title: 'Form Validation',
-        ncyBreadcrumb: {
-            label: 'Validation'
-        },
-        resolve: loadSequence('validationCtrl')
-    }).state('app.form.cropping', {
-        url: '/image-cropping',
-        templateUrl: "assets/views/form_image_cropping.html",
-        title: 'Image Cropping',
-        ncyBreadcrumb: {
-            label: 'Image Cropping'
-        },
-        resolve: loadSequence('ngImgCrop', 'cropCtrl')
-    }).state('app.form.upload', {
-        url: '/file-upload',
-        templateUrl: "assets/views/form_file_upload.html",
-        title: 'Multiple File Upload',
-        ncyBreadcrumb: {
-            label: 'File Upload'
-        },
-        resolve: loadSequence('angularFileUpload', 'uploadCtrl')
-    }).state('app.pages', {
+    })
+
+    //admin profile and messages
+    .state('app.pages', {
         url: '/pages',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'Pages',
@@ -266,29 +59,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             label: 'User Profile'
         },
         resolve: loadSequence('flow', 'userCtrl')
-    }).state('app.pages.invoice', {
-        url: '/invoice',
-        templateUrl: "assets/views/pages_invoice.html",
-        title: 'Invoice',
-        ncyBreadcrumb: {
-            label: 'Invoice'
-        }
-    }).state('app.pages.timeline', {
-        url: '/timeline',
-        templateUrl: "assets/views/pages_timeline.html",
-        title: 'Timeline',
-        ncyBreadcrumb: {
-            label: 'Timeline'
-        },
-        resolve: loadSequence('ngMap')
-    }).state('app.pages.calendar', {
-        url: '/calendar',
-        templateUrl: "assets/views/pages_calendar.html",
-        title: 'Calendar',
-        ncyBreadcrumb: {
-            label: 'Calendar'
-        },
-        resolve: loadSequence('moment', 'mwl.calendar', 'calendarCtrl')
     }).state('app.pages.messages', {
         url: '/messages',
         templateUrl: "assets/views/pages_messages.html",
@@ -297,12 +67,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/inbox/:inboxID',
         templateUrl: "assets/views/pages_inbox.html",
         controller: 'ViewMessageCrtl'
-    }).state('app.pages.blank', {
-        url: '/blank',
-        templateUrl: "assets/views/pages_blank_page.html",
-        ncyBreadcrumb: {
-            label: 'Starter Page'
-        }
     }).state('app.utilities', {
         url: '/utilities',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -310,44 +74,37 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Utilities'
         }
-    }).state('app.utilities.search', {
-        url: '/search',
-        templateUrl: "assets/views/utility_search_result.html",
-        title: 'Search Results',
+    })
+    
+    //products
+    .state('app.products', {
+        url: '/products',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'Products',
         ncyBreadcrumb: {
-            label: 'Search Results'
+            label: 'Products'
         }
-    }).state('app.utilities.pricing', {
-        url: '/pricing',
-        templateUrl: "assets/views/utility_pricing_table.html",
-        title: 'Pricing Table',
+    }).state('app.products.viewproducts', {
+        url: '/viewproducts',
+        templateUrl: "assets/views/products/viewproducts.html",
+        title: 'View the products',
         ncyBreadcrumb: {
-            label: 'Pricing Table'
-        }
-    }).state('app.maps', {
-        url: "/maps",
-        templateUrl: "assets/views/maps.html",
-        resolve: loadSequence('ngMap', 'mapsCtrl'),
-        title: "Maps",
+            label: 'View Products'
+        },
+        resolve: loadSequence('ngTable')
+    }).state('app.products.addproduct', {
+        url: '/addproduct',
+        templateUrl: "assets/views/products/addproduct.html",
+        title: 'New Product',
         ncyBreadcrumb: {
-            label: 'Maps'
-        }
-    }).state('app.charts', {
-        url: "/charts",
-        templateUrl: "assets/views/charts.html",
-        resolve: loadSequence('chartjs', 'tc.chartjs', 'chartsCtrl'),
-        title: "Charts",
-        ncyBreadcrumb: {
-            label: 'Charts'
-        }
-    }).state('app.documentation', {
-        url: "/documentation",
-        templateUrl: "assets/views/documentation.html",
-        title: "Documentation",
-        ncyBreadcrumb: {
-            label: 'Documentation'
-        }
-    }).state('error', {
+            label: 'New Product'
+        },
+        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl')
+    })
+
+
+    //error routes
+    .state('error', {
         url: '/error',
         template: '<div ui-view class="fade-in-up"></div>'
     }).state('error.404', {

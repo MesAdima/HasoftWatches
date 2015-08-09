@@ -13,7 +13,7 @@ function ($rootScope, $state, $stateParams) {
     // set below basic information
     $rootScope.app = {
         name: 'Hasoft Watches', // name of your project
-        author: 'hasoft team', // author's name or company name
+        author: 'Hasoft Team', // author's name or company name
         description: 'E-commerce for selling designer watches', // brief description
         version: '1.0', // current version
         year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
@@ -34,7 +34,7 @@ function ($rootScope, $state, $stateParams) {
         }
     };
     $rootScope.user = {
-        name: 'Roina',
+        name: 'Mugambi',
         job: 'Site admin',
         picture: 'app/img/user/02.jpg'
     };

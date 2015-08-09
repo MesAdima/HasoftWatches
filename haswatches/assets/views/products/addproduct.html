@@ -1,0 +1,80 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.pages.ADDPRODUCT">{{ mainTitle }}</h1>
+			<span class="mainDescription">Upload a new product here</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- Page Content -->
+<div ng-controller="product">
+	<div class="col-md-12">
+		<div class="panel panel-white" id="panel1">
+			<div class="container-fluid container-fullw">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<h5 class="panel-title">Product Information:</h5>
+							</div>
+							<div class="panel-body">
+								<form role="form">
+									<div class="form-group">
+										<label for="pname">
+											First Name
+										</label>
+										<input type="text" class="form-control" id="pname" ng-model="product.name">
+									</div>
+									<div class="form-group">
+										<label>
+											Designer Category
+										</label>
+										
+										<ui-select name="inData"   ng-model="product.categoryID" theme="bootstrap">
+										<ui-select-match ng-click="selected.category_name"placeholder="Search for test..">
+										{{$select.selected.category_name}}
+										</ui-select-match>
+										<ui-select-choices  repeat="category._id as category in categories ">
+										<span ng-bind-html="category.category_name"></span>
+										<small>
+										{{category._id}}
+										</small>
+										</ui-select-choices>
+										</ui-select> 
+									</div>
+									<div class="form-group">
+										<label>
+											Sub Category
+										</label>
+										
+										<!-- <ui-select name="inData"   ng-model="product.subcategoryID" theme="bootstrap">
+										<ui-select-match ng-click=""placeholder="Search for test..">
+										{{$select.selected.test_name}}
+										</ui-select-match>
+										<ui-select-choices  repeat="">
+										<span ng-bind-html=""></span>
+										<small>
+										{{}}
+										</small>
+										</ui-select-choices>
+										</ui-select> -->
+									</div>
+									<div class="form-group">
+										<label for="price">
+											Product price (Ksh)
+										</label>
+										<input type="text" class="form-control" id="price" ng-model="product.price">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of Page Content -->
