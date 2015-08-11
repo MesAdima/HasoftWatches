@@ -99,9 +99,70 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'New Product'
         },
-        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl')
+        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
     })
 
+    //categories
+    .state('app.categories', {
+        url: '/categories',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'Categories',
+        ncyBreadcrumb: {
+            label: 'Categories'
+        }
+    }).state('app.categories.addcategory', {
+        url: '/addcategory',
+        templateUrl: "assets/views/categories/addcategory.html",
+        title: 'New Category',
+        ncyBreadcrumb: {
+            label: 'New Category'
+        },
+        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+    })
+
+    //orders
+    .state('app.orders', {
+        url: '/orders',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'Orders',
+        ncyBreadcrumb: {
+            label: 'Orders'
+        }
+    }).state('app.orders.vieworders', {
+        url: '/vieworders',
+        templateUrl: "assets/views/orders/vieworders.html",
+        title: 'New Order',
+        ncyBreadcrumb: {
+            label: 'New Order'
+        },
+        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+    })
+
+    //users
+    .state('app.users', {
+        url: '/users',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'Users',
+        ncyBreadcrumb: {
+            label: 'Users'
+        }
+    }).state('app.users.viewusers', {
+        url: '/viewusers',
+        templateUrl: "assets/views/users/viewusers.html",
+        title: 'View Users',
+        ncyBreadcrumb: {
+            label: 'View Users'
+        },
+        resolve: loadSequence('ngTable')
+    }).state('app.users.adduser', {
+        url: '/adduser',
+        templateUrl: "assets/views/users/adduser.html",
+        title: 'New User',
+        ncyBreadcrumb: {
+            label: 'New User'
+        },
+        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+    })
 
     //error routes
     .state('error', {
