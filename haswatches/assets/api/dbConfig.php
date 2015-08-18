@@ -1,11 +1,20 @@
 <?php
-function getDB() {
-	$dbhost="localhost";
-	$dbuser="root";
-	$dbpass="";
-	$dbname="db76692";
-	$dbConnection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);	
-	$dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	return $dbConnection;
+
+$dbhost="localhost";
+$dbuser="root";
+$dbpass="";
+$dbname="db76692";
+
+/*
+ Create connection object called $conn
+ (using php's builtin mysqli class)
+*/
+$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+// Check connection (to our mysql database)
+if ($conn->connect_error) {
+    // exit if we can't connect to database
+    die('Unable to connect to database[' . $conn->connect_error. ']');
 }
-?>
+
+ ?>
