@@ -14,15 +14,55 @@
 	<div class="panel panel-white" id="panel1">
 		<div class="container-fluid container-fullw">
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-md-15">
 					<div class="panel panel-white">
-						<div class="panel-heading">
-							<h5 class="panel-title">UNDER DEVELOPMENT</h5>
+						<!-- start: ngTable -->
+						<div class="container-fluid container-fullw">
+							<div class="row">
+								<div class="col-md-12">
+									<h5 class="over-title margin-bottom-15">Site <span class="text-bold">Admins</span></h5>
+									<!-- /// controller:  'ngTableCtrl6' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+									<div ng-controller="ngTableCtrl6">
+									<div ng-controller="user">
+										<div class="row margin-bottom-10">
+											<div class="col-md-12">
+												<button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">
+												Clear sorting
+												</button>
+											</div>
+										</div>
+										<strong>Sorting:</strong> {{tableParams.sorting()|json}}
+										<div class="table-responsive">
+											<table ng-table="tableParams" class="table">
+												<tbody ng-repeat="user in users">
+													<tr id="tr{{user._id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+														<td class="rowTd" data-title="'AdminID'"          sortable="'_id'">{{user._id}}</td>
+														<td class="rowTd" data-title="'Firstname'"   sortable="'fname'">{{user.fname}}</td>
+														<td class="rowTd" data-title="'Surname'"    sortable="'sname'">{{user.sname}}</td>
+														<td class="rowTd" data-title="'Email'"       sortable="'email'">{{user.email}}</td>
+														<td class="rowTd" data-title="'Phone'"       sortable="'phone_number'">{{user.phone_number}}</td>
+														<td class="rowTd" >
+															<div class="pull-right margin-right-10">
+																<input type=button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{user._id}}" value="edit"
+																ng-click="setEditId(user._id)">
+															</div></td>
+														</tr>
+														<tr ng-show="editId===user._id" ng-if="editId===user._id">
+															<td colspan="7" ng-include src="'assets/views/users/editRow.html'"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end: ngTable -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- end: YOUR CONTENT HERE -->
+	<!-- end: YOUR CONTENT HERE -->

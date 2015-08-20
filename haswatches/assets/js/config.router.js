@@ -153,7 +153,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'View Users'
         },
-        resolve: loadSequence('ngTable')
+        resolve: loadSequence('ngTable', 'ngTableCtrl', 'usersCtrl')
     }).state('app.users.adduser', {
         url: '/adduser',
         templateUrl: "assets/views/users/adduser.html",
@@ -161,7 +161,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'New User'
         },
-        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+        resolve: loadSequence('ngTable', 'angularBootstrapNavTree', 'treeCtrl', 'usersCtrl')
     })
 
     //error routes

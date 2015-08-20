@@ -10,14 +10,47 @@
 </section>
 <!-- end: PAGE TITLE -->
 <!-- start: YOUR CONTENT HERE -->
-<div class="col-md-12">
-	<div class="panel panel-white" id="panel1">
-		<div class="container-fluid container-fullw">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="panel panel-white">
-						<div class="panel-heading">
-							<h5 class="panel-title">UNDER DEVELOPMENT</h5>
+<div ng-controller="user">
+	<div class="col-md-12">
+		<div class="panel panel-white" id="panel1">
+			<div class="container-fluid container-fullw">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<h5 class="panel-title">User Information</h5>
+							</div>
+							<div class="panel-body">
+								<form role="form" name="usersForm" ng-submit="submitForm(usersForm.$valid)" novalidate>
+									<div class="form-group">
+										<label for="fname">
+											First Name
+										</label>
+										<input type="text" class="form-control" id="fname" ng-model="fname" required>
+									</div>
+									<div class="form-group">
+										<label for="sname">
+											Surname
+										</label>
+										<input type="text" class="form-control" id="sname" ng-model="sname" required>
+									</div>
+									<div class="form-group">
+										<label for="Email">
+											Email address
+										</label>
+										<input type="email" class="form-control" id="Email" ng-model="email" required=>
+									</div>
+									<div class="form-group">
+										<label for="pno">
+											Phone number
+										</label>
+										<input type="text" class="form-control" id="pno" ng-model="phone" ng-maxlength="10">
+									</div>
+									<button type="submit" class="btn btn-o btn-primary" ng-click="adduser()">
+									Save Details
+									</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
