@@ -337,26 +337,26 @@
 
   $( "#slider-range-min" ).slider({
     range: "min",
-    value: 42,
-    min: 1,
-    max: 100,
+    value: 50000,
+    min: 10000,
+    max: 100000,
     slide: function( event, ui ) {
-      $( "#amount" ).val( ui.value +   "km" );
+      $( "#amount" ).val( ui.value +   "ksh" );
     }
   });
-  $( "#amount" ).val( $( "#slider-range-min" ).slider( "value" ) +   "km");
+  $( "#amount" ).val( $( "#slider-range-min" ).slider( "value" ) +   "ksh");
 
 
   $( "#slider-range-search" ).slider({
     range: "min",
-    value: 42,
-    min: 1,
-    max: 100,
+    value: 50000,
+    min: 10000,
+    max: 100000,
     slide: function( event, ui ) {
-      $( "#amount-search" ).val( ui.value +   "km" );
+      $( "#amount-search" ).val( ui.value +   "ksh" );
     }
   });
-  $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "km");
+  $( "#amount-search" ).val( $( "#slider-range-search" ).slider( "value" ) +   "ksh");
 
 
 

@@ -5,7 +5,7 @@ app.controller('user', ['$scope', '$http',
     function($scope, $http) {
         users = [];
         $scope.users = [];
-
+        
         //post a user
         $scope.adduser = function() {
             // alert(base_url + "/addCategories.php?action=add_category");return;
@@ -18,6 +18,7 @@ app.controller('user', ['$scope', '$http',
 
             ).success(function(data, status, headers, config) {
                 console.log('user added ', data);
+                $scope.demo3();
             });
         }
 
@@ -33,7 +34,7 @@ app.controller('user', ['$scope', '$http',
 
         $scope.update = function() {
 
-            $http.post(base_url + "/updateUser.php?action=update_user", {
+            var w = $http.post(base_url + "/updateUser.php?action=update_user", {
                 'id': $scope.user._id,
                 'fname': $scope.fname,
                 'sname': $scope.user.sname,
@@ -41,7 +42,7 @@ app.controller('user', ['$scope', '$http',
                 'phone_number': $scope.user.phone
             })
                 .success(function(data, status, headers, config) {
-                    console.log($scope.fname);return;
+                    //console.log(w);return;
                     //getUsers();
                 })
                 .error(function(data, status, headers, config) {

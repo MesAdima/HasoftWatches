@@ -133,7 +133,7 @@ app.controller('ngTableCtrl3', ["$scope", "$filter", "ngTableParams", function (
         total: data.length, // length of data
         getData: function ($defer, params) {
             // use build-in angular filter
-            var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+            var orderedData = params.filter() ? $filter('filter')(products, params.filter()) : data;
             $scope.users = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
             params.total(orderedData.length);
             // set total for recalc pagination

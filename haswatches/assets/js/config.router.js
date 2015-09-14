@@ -91,7 +91,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'View Products'
         },
-        resolve: loadSequence('ngTable')
+        resolve: loadSequence('ngTable', 'ngTableCtrl', 'productsCtrl', 'angularFileUpload')
     }).state('app.products.addproduct', {
         url: '/addproduct',
         templateUrl: "assets/views/products/addproduct.html",
@@ -117,7 +117,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'New Category'
         },
-        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+        resolve: loadSequence('ngTable', 'ngTableCtrl', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl', 'angularFileUpload')
     })
 
     //orders
@@ -135,7 +135,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'New Order'
         },
-        resolve: loadSequence('ngTable', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl')
+        resolve: loadSequence('ngTable', 'ngTableCtrl', 'ordersCtrl')
     })
 
     //users
@@ -161,7 +161,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'New User'
         },
-        resolve: loadSequence('ngTable', 'angularBootstrapNavTree', 'treeCtrl', 'usersCtrl')
+        resolve: loadSequence('ngTable', 'angularBootstrapNavTree', 'treeCtrl', 'usersCtrl', 'sweetAlertCtrl')
     })
 
     //error routes

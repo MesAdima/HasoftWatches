@@ -53,6 +53,8 @@ app.constant('JS_REQUIRES', {
         'chatCtrl': 'assets/js/controllers/chatCtrl.js',
         'productsCtrl': 'assets/js/controllers/productsCtrl.js',
         'usersCtrl': 'assets/js/controllers/usersCtrl.js',
+        'ordersCtrl': 'assets/js/controllers/ordersCtrl.js',
+
 
         
         //*** Filters

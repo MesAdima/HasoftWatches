@@ -10,28 +10,30 @@
 </section>
 <!-- end: PAGE TITLE -->
 <!-- Page Content -->
-	<div ng-controller="product">
-		<div class="col-md-12">
-			<div class="panel panel-white" id="panel1">
-				<div class="container-fluid container-fullw">
-					<div class="row">
-						<div class="col-md-10">
-							<div class="panel panel-white">
-								<div class="panel-heading">
-									<h5 class="panel-title">Product Categories:</h5>
-								</div>
-								<div class="panel-body">
-									<form role="form">
-										<div class="form-group">
-											<label for="catname">
-												Category Name
-											</label>
-											<input type="text" class="form-control" id="catname" ng-model="categoryname">
-										</div>
-										<div class="form-group">
-											<label for="catdescription">
-												Description
-											</label>
+<div ng-controller="product">
+	<div class="col-md-12">
+		<div class="panel panel-white" id="panel1">
+			<div class="container-fluid container-fullw">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<h5 class="panel-title">Product Categories:</h5>
+							</div>
+							<tabset class="tabbable" type="pills">
+							<tab heading="Add Category">
+							<div class="panel-body">
+								<form role="form">
+									<div class="form-group">
+										<label for="catname">
+											Category Name
+										</label>
+										<input type="text" class="form-control" id="catname" ng-model="categoryname">
+									</div>
+									<div class="form-group">
+										<label for="catdescription">
+											Description
+										</label>
 										
 										<div class="panel-body">
 											<div class="form-group" id="catdescription">
@@ -40,17 +42,60 @@
 												</div>
 											</div>
 										</div>
+									</div>
+								</form>
+								<button type="button" class="btn btn-o btn-wide btn-primary" id="newtest" ng-click="addcategories()">
+								Save Category
+								</button>
+							</div>
+							</tab>
+							<tab heading="View Categories">
+							<div class="container-fluid container-fullw bg-white">
+								<div class="row">
+									<div class="col-md-12">
+										<h5 class="over-title margin-bottom-15">Watch <span class="text-bold">categories</span></h5>
+										
+										<div ng-controller="ngTableCtrl">
+											<div ng-controller="product">
+												<table ng-table="tableParams" class="table table-striped" template-pagination="custom/pager">
+													<tr ng-repeat="category in categories">
+														<td data-title="'Category name'">{{category.category_name}}</td>
+														<td data-title="'Description'">{{category.description}}</td>
+													</tr>
+												</table>
+												<script type="text/ng-template" id="custom/pager">
+													<ul class="pager ng-cloak">
+														<li ng-repeat="page in pages"
+															ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+															ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+															<a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+															<a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+														</li>
+														<li>
+															<div class="btn-group">
+																<button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+																<button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+																<button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+																<button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+															</div>
+														</li>
+													</ul>
+												</script>
+											</div>
 										</div>
-									</form>
-									<button type="button" class="btn btn-o btn-wide btn-primary" id="newtest" ng-click="addcategories()">
-									Save Category
-									</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					</tab>
+					</tabset>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
+</div>
 <!-- End of Page Content -->

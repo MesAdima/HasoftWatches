@@ -41,7 +41,13 @@ module
         removeAfterUpload: false,
         method: 'POST',
         filters: [],
-        formData: [],
+        formData: [{
+            name: product.name,
+                     category: product.category,
+                    subcategory: product.subcategory,
+                     price: product.price
+        }
+        ],
         queueLimit: Number.MAX_VALUE,
         withCredentials: false
     })
