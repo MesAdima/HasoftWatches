@@ -1,0 +1,24 @@
+/**
+This file describes successive edits to files, directories and libraries
+*/
+
+**File Creation & Editing
+
+-  Created /header.php , /footer.php , /category.php , /libs/haswatches.lib.php
+-  Created new PHPMailer instances from files at /libs/mail/* 
+-  Imported /phpfiles/login.php into /index.php   - Tested OK
+- Imported /phpfiles/register.php into /index.php  - Tested OK
+- Imported /phpfiles/activation.php into /index.php and modified it - Tested OK 
+- Initiated a mailing mechanism using new PHPMailer instance on /index.php - Tested OK.
+
+	Directories
+
+		- created product images upload directory - /uploads
+
+
+**Database Mofification.
+ - Altered categories Table - Added additional `icon` field varcha(255) to hold category icon.
+ - Declared Subcategories Not important, hence not used in listing - at least at the moment
+-  Ignored subcategoryID column in table `products`
+-  Altered `products` changed charcter length of image column to 255. (to store long image URLs)
+

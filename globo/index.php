@@ -1,225 +1,152 @@
+<?php
+//This is a global PHP INclude section
+include 'db/dbConfig.php';
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+include '/libs/haswatches.lib.php';
 
-  <title>Hasoft Watches</title>
+$msg = array();
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
+session_start(); // Starting Session - Picks up session variables if set
+?>
 
-  <!-- GOOGLE FONTS -->
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,600,800%7COpen+Sans:400italic,400,600,700' rel='stylesheet' type='text/css'>
+<?php
+/**Account Activation
 
-  <!--[if IE 9]>
-    <script src="js/media.match.min.js"></script>
-  <![endif]-->
+*/
 
-</head>
+if(isset($_GET['action']) && $_GET['action'] == 'activate'){
 
-<body>
+  include 'activation.php';
+}
 
-<div id="main-wrapper">
-  <header id="header">
-    <div class="header-top-bar">
-      <div class="container">
-        <!-- HEADER-LOGIN -->
-        <div class="header-login">
 
-          <a href="#" class=""><i class="fa fa-power-off"></i> Login</a>
+/**Login Code:
 
-          <div>
+*/
 
-          <!--<script type="text/javascript"> 
-          function validateLogin() {
-    var username = document.forms["LoginForm"]["Username"].value;
-    if (username == null || username == "") {
-        alert("Username must be filled out");
-        return false;
+if (isset($_POST['login'])) {
+    if (empty($_POST['username']) || empty($_POST['pass'])) {
+           $msg[] = "Username or Password is invalid";
     }
-}</script>-->
-           
-            <form method="POST"  action="phpfiles/login.php">
-              <input type="text" class="form-control" placeholder="Username" required="required" name="username">
-              <input type="password" class="form-control" placeholder="Password" name="pass" required="required" name="pass">
-              <input type="submit" name="login" class="btn btn-default" value="Login">
-              <span><?php echo $error; ?></span>
-              <!--a href="welcomeuser.html" class="btn btn-o-default">Login</a--!>
-              <a href="" class="btn btn-link">Forgot Password?</a>
-            </form>
-          </div>
+    else
+    {
+              // Define $username and $password
+              $username=$_POST['username'];
+              $password=md5($_POST['pass']);
 
-        </div> <!-- END .HEADER-LOGIN -->
+              // To protect MySQL injection for Security purpose
+              $username = stripslashes($username);
+              $password = stripslashes($password);
+              $username = mysqli_real_escape_string($conn, $username);
+              $password = mysqli_real_escape_string($conn, $password);
 
-        <!-- HEADER REGISTER -->
+              // $qry = "SELECT * FROM users WHERE email = '".$email."'";
+              //      $result = mysqli_query($conn,$qry);
+              //      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+              // SQL query to fetch information of registerd users and finds user match.
+              $query = "SELECT * from users where username='$username' AND password='$password'";
+              $result = mysqli_query($conn,$query);
+              $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
+              //echo "<pre>";print_r($rows);exit;
+              if (mysqli_num_rows($result) == 1) {
+                //echo "true login string"; --> Set sessions
+
+              $_SESSION['userArray'] = $rows;
+
+              $_SESSION['login_user']=$username; // Initializing Session
+
+              header("location: index.php"); // Redirecting To Other Page
+
+              } else {
+                //echo "false login string";
+              $msg[] = "Username or Password is invalid";
+
+              //header("location: http://localhost:81/haswatches/globo/index.php"); // Redirecting To Other Page
+              }
+    mysqli_close($conn); // Closing Connection
+    }
+}
+/**
+Register Code
+
+*/
+if(!empty($_POST['username']) && !empty($_POST['password'])){
+
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
         
-        <div class="header-register">
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
-
-          <div>
-            <form method="POST" action="phpfiles/register.php" name="registerform" id="registerform">
-              <input type="text" class="form-control" placeholder="Username" name="username" id="username">
-              <input type="email" class="form-control" placeholder="Email" name="email" id="email">
-              <input type="password" class="form-control" placeholder="Password" name="password" id="password">
-              <input type="submit" class="btn btn-default" value="Register" name="register" id="register">
-            </form>
-          </div>
-
-        </div>
         
-        <!-- END .HEADER-REGISTER -->
+        $username = mysqli_real_escape_string($conn, $username);
+        $email = mysqli_real_escape_string($conn, $email);
+        $password = mysqli_real_escape_string($conn, $password);
+        
+        // regular expression for email check
+        $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
 
-        <!-- HEADER-LOG0 -->
-        <div class="header-logo text-center">
-          <h2><a href="index-2.html">HAS<i class="fa fa-globe"></i>FT</a></h2>
-          <h2>WATCHES</h2>
-        </div>
-        <!-- END HEADER LOGO -->
+        if(preg_match($regex, $email)){
+            $qry = "SELECT * FROM users WHERE email = '".$email."'";
+            $result = mysqli_query($conn,$qry);
+            $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-        <!-- HEADER-SOCIAL -->
-        <div class="header-social">
-          <a href="#">
-            <span><i class="fa fa-share-alt"></i></span>
-            <i class="fa fa-chevron-down social-arrow"></i>
-          </a>
+            if(mysqli_num_rows($result) == 1){
+                $msg[] = 'The email is already taken, please try new.';
+            }
+            else {
+            $password = md5($password);
+            $activation = md5(uniqid(rand(), true));
 
-          <ul class="list-inline">
-            <li class="active"><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-          </ul>
-        </div>
-        <!-- END HEADER-SOCIAL -->
+            $registerquery = mysqli_query($conn, "INSERT INTO users (username, password, email,activationkey) VALUES('".$username."', '".$password."', '".$email."', '".$activation."')")
+            or die(mysqli_error($conn)); //The die is for error detection
+            //Initially showed: Column count doesn't match value count at row 1 -> No Insertion
 
-        <!-- HEADER-LANGUAGE -->
-        <div class="header-language">
-          <a href="#">
-            <span>EN</span>
-            <i class="fa fa-chevron-down"></i>
-          </a>
-
-          <ul class="list-unstyled">
-            <li class="active"><a href="#">EN</a></li>
-            <li><a href="#">FR</a></li>
-            <li><a href="#">PT</a></li>
-            <li><a href="#">IT</a></li>
-          </ul>
-        </div> <!-- END HEADER-LANGUAGE -->
-
-        <!-- CALL TO ACTION -->
-        <div class="header-call-to-action">
-          <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> Intl Orders</a>
-        </div><!-- END .HEADER-CALL-TO-ACTION -->
-
-      </div><!-- END .CONTAINER -->
-    </div>
-    <!-- END .HEADER-TOP-BAR -->
-
-    <!-- HEADER SEARCH SECTION -->
-    <div class="header-search slider-home">
-      <div class="header-search-bar">
-        <form action="#">
-
-          <div class="search-toggle">
-            <div class="container">
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Price range:</label>
-                  <input type="text" id="amount-search">
-                </p>
-
-                <div id="slider-range-search"></div>
-              </div>  <!-- end #distance-range -->
-
-              <!--<div class="distance-range">
-                <p>
-                  <label for="amount-search">Days published:</label>
-                  <input type="text" id="amount-search-day">
-                </p>
-
-                <div id="slider-range-search-day"></div>
-              </div>  <!-- end #distance-range -->
-
-              <!--<p>Location:</p>
-              <div class="select-country">
-                <select class="" data-placeholder="-Select Country-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <div class="region">
-                <input type="text" placeholder="-Region-">
-              </div>
-
-              <div class="address">
-                <input type="text" placeholder="-Address-">
-              </div>-->
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Search by collection-">
-                  <!--<option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>-->
-                </select>
-              </div>
-
-               <div class="category-search">
-                <select class="" data-placeholder="-Search by release year-">
-                  <!--<option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>-->
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-            </div>
-          </div> <!-- END .search-toggle -->
-
-          <div class="container">
-            <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
-
-            <div class="search-value">
-              <div class="keywords">
-                <input type="text" class="form-control" placeholder="Designer">
-              </div>
-
-              <div class="select-location">
-                <select class="" data-placeholder="Select Gender">
-                  <option value="option1">Male</option>
-                  <option value="option2">Female</option>
-                  <option value="option3">Unisex</option>
-                  <!--<option value="option4">option 4</option>-->
-                </select>
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <!--<option value="option1">Grail</option>
-                  <option value="option2">Sport</option>
-                  <option value="option3">Digital</option>
-                  <option value="option4">Dress</option>
-                  <option value="option4">Pilot/Flieger</option>
-                  <option value="option4">Fashion</option>
-                  <option value="option4">Heirloom/Family</option>-->
-                  <?php include 'getProducts.php';?>
-                </select>
-
+            /*** Script for send email start here ***/
+                $to = $email;
+                $subject = 'Haswatches :: Email verification';
+                $body = '
+ 
+                    Thanks for signing up!<br><br>
+                    Your account has been created, you can login with the following credentials after you have activated your account by clicking the url below.
+                     
+                    <br>------------------------<br><br>
+                    Username: '.$username.' <br><br>
+                    ------------------------<br><br>
+                     
+                    Please click this link to activate your account:<br><br>
+                    http://localhost:81/haswatches/globo/index.php?action=activate&key='.$activation.'
+                     
+                    '; // Our message above including the link
+                    $headers = 'From:noreply@haswatches.com' . "\r\n"; // Set from headers
+                    mail($to, $subject, $body, $headers); // Send our email
                 
+                //This is the new mailer - PHP Mailer Still
+                     require_once('libs/mail/class.smtp.php');
+                    require_once('libs/mail/class.phpmailer.php');
+                      include 'libs/mail/sendmail.php';
+               /**if(Send_Mail($to, $subject, $body, $headers)){ //Remember to give success messages when you're certain the action has been accomplished
 
-              </div>
+                //This is what you intend the user to see, but you havent echoed it
+                $msg[] = 'Registration successful, please check your email for a link to activate your account.';
 
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-          </div> <!-- END .CONTAINER -->
-        </form>
-      </div> <!-- END .header-search-bar -->
+                //echo $subject."<hr>".$body."<hr>";
+
+               }else{
+                $msg[] ='Adima, you are fucked';
+               }*/
+
+                /*** Script for send email end here ***/
+ 
+
+            }
+        }
+     }
+?>
+
+
+<?php
+$title = 'Home';
+ include 'header.php';?>
 
       <div class="slider-content">
 
@@ -355,60 +282,21 @@
                     <h3>Hasoft Watches<span>Categories</span></h3>
 
                     <div class="row clearfix">
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
 
-                          <a href="search-result.html"><i class="fa fa-clock-o"></i>Wristwatches</a>
-                        </div>
-                      </div>
+                        <?php //We display the categories from DB
 
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
+                          foreach(getCategories() as $category):?>
 
-                          <a href="search-result.html"><i class="fa fa-futbol-o"></i>Sport Watches</a>
-                        </div>
+                              <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="category-item">
 
-                      </div>
+                                  <a href="category.php?id=<?php echo $category['_id'];?>"><i class="fa fa-<?php echo $category['icon'];?>"></i><?php echo $category['category_name'];?></a>
+                                </div>
+                              </div>
+                        <?php endforeach;?>
+                      
 
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-play"></i>Digital Watches</a>
-                        </div>
-
-                      </div>
-
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-male"></i>Dress Watches</a>
-                        </div>
-
-                      </div>
-
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-plane"></i>Pleiger &amp; Pilot Watches</a>
-                        </div>
-
-                      </div>
-
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-text-height"></i>Fashion</a>
-                        </div>
-
-                      </div>
-
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="category-item">
-
-                          <a href="search-result.html"><i class="fa fa-apple"></i>Smart Watches</a>
-                        </div>
-
-                      </div>
+                      
 
                       <!--<div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="category-item">
@@ -2188,146 +2076,4 @@
   </div>
   <!-- END REGISTER-CONTENT -->
 
-  <!-- OUR PARTNER SLIDER BEGIN -->
-    <div class="our-partners">
-      <div class="container">
-        <h4>Our Partners</h4>
-
-        <div id="partners-slider" class="owl-carousel owl-theme">
-          <div class="item"><a href="#"><img src="img/content/partner1.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner2.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner3.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner4.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner5.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner6.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner1.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner2.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner3.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner4.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner5.png" alt=""></a></div>
-          <div class="item"><a href="#"><img src="img/content/partner6.png" alt=""></a></div>
-        </div>
-      </div>
-    </div>
-    <!-- END OUR PARTNER SLIDER -->
-
-  <footer id="footer">
-    <div class="main-footer">
-
-      <div class="container">
-        <div class="row">
-
-          <div class="col-md-3 col-sm-6">
-            <div class="about-globo">
-              <h3>About Hasoft</h3>
-
-              <div class="footer-logo">
-                <!--<a href="#"><img src="img/footer_logo.png" alt=""></a>
-                <span></span> <!-- This content for overlay effect -->
-              </div>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue,
-                suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
-
-            </div> <!-- End .about-globo -->
-          </div> <!-- end Grid layout-->
-
-          <div class="col-md-3 col-sm-6">
-            <h3>Latest From Blog</h3>
-
-            <div class="latest-post clearfix">
-              <div class="post-image">
-                <img src="img/content/latest_post_1.jpg" alt="">
-
-                <p><span>12</span>Sep</p>
-              </div>
-
-              <h4><a href="#">Bloom in Style!</a></h4>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-
-            <div class="latest-post clearfix">
-              <div class="post-image">
-                <img src="img/content/latest_post_2.jpg" alt="">
-
-                <p><span>09</span>Sep</p>
-              </div>
-
-              <h4><a href="#">Hey Hey Mr DJ</a></h4>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-          </div> <!-- end Grid layout-->
-
-          <div class="col-md-3 col-sm-6 clearfix">
-            <div class="popular-categories">
-              <h3>Popular Categories</h3>
-
-              <ul>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i>E-commerce</a></li>
-                <li><a href="#"><i class="fa fa-paper-plane-o"></i>Entertainment</a></li>
-                <li><a href="#"><i class="fa fa-cogs"></i>Industry</a></li>
-                <li><a href="#"><i class="fa fa-book"></i>Libraries &amp; Public Office</a></li>
-                <li><a href="#"><i class="fa fa-building-o"></i>Real Estate</a></li>
-              </ul>
-            </div> <!-- end .popular-categories-->
-          </div> <!-- end Grid layout-->
-
-          <div class="col-md-3 col-sm-6">
-            <div class="newsletter">
-              <h3>Newsletter</h3>
-
-              <form action="#">
-                <input type="Email" placeholder="Email address">
-                <button><i class="fa fa-plus"></i></button>
-              </form>
-
-              <h3>Keep In Touch</h3>
-
-              <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-              </ul>
-            </div> <!-- end .newsletter-->
-
-          </div> <!-- end Grid layout-->
-        </div> <!-- end .row -->
-      </div> <!-- end .container -->
-    </div> <!-- end .main-footer -->
-
-    <div class="copyright">
-      <div class="container">
-        <p>Copyright 2014 &copy; globo. All rights reserved. Powered by  <a href="#">Uouapps</a></p>
-
-        <ul class="list-inline">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Shortcodes</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div> <!-- END .container -->
-    </div> <!-- end .copyright-->
-  </footer> <!-- end #footer -->
-
-
-
-</div> <!-- end #main-wrapper -->
-
-<!-- Scripts -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-<script src="js/jquery.ba-outside-events.min.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="js/gomap.js"></script>
-<script type="text/javascript" src="js/gmaps.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.js"></script>
-<script src="js/scripts.js"></script>
-
-</body>
-</html>
+ <?php include 'footer.php';?>

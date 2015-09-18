@@ -1,228 +1,29 @@
 <?php
+//This is a global PHP INclude section
+include 'db/dbConfig.php';
 
-include ('/phpfiles/session.php');
+include '/libs/haswatches.lib.php';
+
+$msg = array();
+
+session_start(); // Starting Session - Picks up session variables if set
+
+$title = 'Welcome';
+
+include 'header.php';
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <title>Watch of the Day</title>
-
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- GOOGLE FONTS -->
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,600,800%7COpen+Sans:400italic,400,600,700' rel='stylesheet' type='text/css'>
-
-
-  <!--[if IE 9]>
-    <script src="js/media.match.min.js"></script>
-  <![endif]-->
-</head>
-
-<body>
-<div id="main-wrapper">
-
-  <header id="header">
-    <div class="header-top-bar">
-      <div class="container">
-        <!-- HEADER-LOGIN -->
-        <div class="header-login">
-
-          <a href="index.php" class=""><i class="fa fa-power-off"></i> Logout</a>
-
-          <div>
-
-            <!--<form action="#">
-              <input type="text" class="form-control" placeholder="Username">
-              <input type="password" class="form-control" placeholder="Password">
-              <input type="submit" class="btn btn-default" value="Login">
-              <a href="#" class="btn btn-link">Forgot Password?</a>
-            </form>
-          </div>-->
-
-        </div> <!-- END .HEADER-LOGIN -->
-
-        <!-- HEADER REGISTER -->
-        <!--div class="header-register">
-          <a href="#" class=""><i class="fa fa-plus-square"></i> Register</a>
-
-          <div>
-            <form action="#">
-              <input type="text" class="form-control" placeholder="Username">
-              <input type="email" class="form-control" placeholder="Email">
-              <input type="password" class="form-control" placeholder="Password">
-              <input type="submit" class="btn btn-default" value="Register">
-            </form>
-          </div -->
-
-        </div> <!-- END .HEADER-REGISTER -->
-
-        <!-- HEADER-LOG0 -->
-        <div class="header-logo text-center">
-          <h2><a href="index-2.html">HAS<i class="fa fa-globe"></i>FT</a></h2>
-        </div>
-        <!-- END HEADER LOGO -->
-
-        <!-- HEADER-SOCIAL -->
-        <div class="header-social">
-          <a href="#">
-            <span><i class="fa fa-share-alt"></i></span>
-            <i class="fa fa-chevron-down social-arrow"></i>
-          </a>
-
-          <ul class="list-inline">
-            <li class="active"><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-          </ul>
-        </div>
-        <!-- END HEADER-SOCIAL -->
-
-        <!-- HEADER-LANGUAGE -->
-        <div class="header-language">
-          <a href="#">
-            <span>EN</span>
-            <i class="fa fa-chevron-down"></i>
-          </a>
-
-          <ul class="list-unstyled">
-            <li class="active"><a href="#">EN</a></li>
-            <li><a href="#">FR</a></li>
-            <li><a href="#">PT</a></li>
-            <li><a href="#">IT</a></li>
-          </ul>
-        </div> <!-- END HEADER-LANGUAGE -->
-
-        <!-- CALL TO ACTION -->
-        <div class="header-call-to-action">
-          <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> Intl. Orders</a>
-        </div><!-- END .HEADER-CALL-TO-ACTION -->
-
-      </div><!-- END .CONTAINER -->
-    </div>
-    <!-- END .HEADER-TOP-BAR -->
-
-    <!-- HEADER SEARCH SECTION -->
-    <div class="header-search price-header-height">
-      <div class="header-search-bar">
-        <form action="#">
-
-          <div class="search-toggle">
-            <div class="container">
-              <div class="distance-range">
-                <p>
-                  <label for="amount-search">Price range:</label>
-                  <input type="text" id="amount-search">
-                </p>
-
-                <div id="slider-range-search"></div>
-              </div>  <!-- end #distance-range -->
-
-              <!--<div class="distance-range">
-                <p>
-                  <label for="amount-search">Days published:</label>
-                  <input type="text" id="amount-search-day">
-                </p>
-
-                <div id="slider-range-search-day"></div>
-              </div>  <!-- end #distance-range -->
-
-              <!--<p>Location:</p>
-              <div class="select-country">
-                <select class="" data-placeholder="-Select Country-">
-                  <option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>
-                </select>
-              </div>
-
-              <div class="region">
-                <input type="text" placeholder="-Region-">
-              </div>
-
-              <div class="address">
-                <input type="text" placeholder="-Address-">
-              </div>-->
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Search by collection-">
-                  <!--<option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>-->
-                </select>
-              </div>
-
-               <div class="category-search">
-                <select class="" data-placeholder="-Search by release year-">
-                  <!--<option value="option1">option 1</option>
-                  <option value="option2">option 2</option>
-                  <option value="option3">option 3</option>-->
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-
-            </div>
-          </div> <!-- END .search-toggle -->
-
-          <div class="container">
-            <button class="toggle-btn" type="submit"><i class="fa fa-bars"></i></button>
-
-            <div class="">
-              <select class="" data-placeholder="-Select designer-">
-                  <?php
-                  include('/phpfiles/designers.php');
-                  while ($design = mysqli_fetch_assoc($resultdesigners)) {
-                  echo "<option value='{".$design['_id']."}'>".$design['name']."</option>";
-                  }
-                ?>
-                </select>
-              </div>
-
-              <div class="category-search">
-                <select class="" data-placeholder="-Select category-">
-                  <?php
-                  include('/phpfiles/categories.php');
-                  while ($cat = mysqli_fetch_assoc($resultcategories)) {
-                  echo "<option value='{".$cat['_id']."}'>".$cat['category_name']."</option>";
-                  }
-                ?>
-                </select>
-              </div>
-
-              <div class="select-location">
-                <select class="" data-placeholder="-Select Subcategory-">
-                  <?php
-                  include('/phpfiles/subcategories.php');
-                  while ($subcat = mysqli_fetch_assoc($resultsubcategories)) {
-                  echo "<option value='{".$subcat['_id']."}'>".$subcat['sub_category_name']."</option>";
-                  }
-                ?>
-                </select>
-              </div>
-
-              <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-          </div> <!-- END .CONTAINER -->
-        </form>
-      </div> <!-- END .header-search-bar --> <!-- END .header-search-bar -->
 
       <div class="sample-page-heading">
         <span></span> <!-- for dark-overlay on the bg -->
 
         <div class="container">
 
-          <h1>WELCOME BACK <span><?php echo $login_session; ?></span></h1>
+          <h1>WELCOME BACK <span><?php echo $_SESSION['login_user']; ?></span></h1>
 
         </div> <!-- END .container-->
       </div> <!-- END .about-us-heading -->
 
-    </div> <!-- END .SEARCH and slide-section -->
+    </div> </div><!-- END .SEARCH and slide-section -->
 
 
 

@@ -74,6 +74,9 @@
       "categories": {
         "add_categories": "Add Categories"
       },
+      "designers": {
+        "add_designer": "Add Designers"
+      },
       "orders": {
         "view_orders": "View Orders",
         "report1": "Report 1",
@@ -120,7 +123,8 @@
         "MESSAGES": "Messages",
         "ADDPRODUCT": "New Product",
         "VIEWPRODUCTS": "View Products",
-        "ADDCATEGORY": "Add Category",
+        "ADDCATEGORY": "Manage Categories",
+        "ADDESIGNER": "Manage Designers",
         "VIEWORDERS": "View Orders",
         "ADDUSER": "Add User",
         "VIEWUSERS": "View Users"

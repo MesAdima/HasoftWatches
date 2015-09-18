@@ -10,7 +10,7 @@
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="{{ 'sidebar.search.PLACEHOLDER' | translate }}">
 			<button class="btn search-button" type="submit">
-				<i class="ti-search"></i>
+			<i class="ti-search"></i>
 			</button>
 		</div>
 	</form>
@@ -21,7 +21,6 @@
 	<span translate="sidebar.heading.MENU">Menu</span>
 </div>
 <ul class="main-navigation-menu">
-
 	<!-- Dashboard -->
 	<li ui-sref-active="active" class="module">
 		<a ui-sref="app.dashboard">
@@ -35,7 +34,6 @@
 			</div>
 		</a>
 	</li>
-
 	<!-- Products -->
 	<li ng-class="{'active open':$state.includes('app.products')}" class="module">
 		<a href="javascript:void(0)">
@@ -49,15 +47,14 @@
 			</div>
 		</a>
 		<ul class="sub-menu">
-
-		<li ui-sref-active="active">
+			<li ui-sref-active="active">
 				<a ui-sref="app.products.viewproducts">
 					<i class="ti-hand-point-right"></i>
 					<span class="title" translate="sidebar.nav.products.view_products"> View Products </span>
 				</a>
 			</li>
 			
-		<li ui-sref-active="active">
+			<li ui-sref-active="active">
 				<a ui-sref="app.products.addproduct">
 					<i class="ti-hand-point-right"></i>
 					<span class="title" translate="sidebar.nav.products.add_product"> Add products </span>
@@ -88,8 +85,7 @@
 			</li>
 		</ul>
 	</li>
-
-	<!-- Categories -->
+	<!-- Categories and designers -->
 	<li ng-class="{'active open':$state.includes('app.categories')}" class="module">
 		<a href="javascript:void(0)">
 			<div class="item-content">
@@ -102,10 +98,16 @@
 			</div>
 		</a>
 		<ul class="sub-menu">
-		<li ui-sref-active="active">
+			<li ui-sref-active="active">
 				<a ui-sref="app.categories.addcategory">
 					<i class="ti-hand-point-right"></i>
 					<span class="title" translate="sidebar.nav.categories.add_categories"> Add categories </span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.designers.addesigners">
+					<i class="ti-hand-point-right"></i>
+					<span class="title" translate="sidebar.nav.designers.add_designer"> Add designers </span>
 				</a>
 			</li>
 		</ul>
@@ -125,7 +127,7 @@
 			</div>
 		</a>
 		<ul class="sub-menu">
-		<li ui-sref-active="active">
+			<li ui-sref-active="active">
 				<a ui-sref="app.orders.vieworders">
 					<span class="title" translate="sidebar.nav.orders.view_orders"> View Orders </span>
 				</a>
@@ -177,49 +179,48 @@
 				<a ui-sref="app.users.adduser">
 					<span class="title" translate="sidebar.nav.users.add_user"> Add User </span>
 				</a>
-			<li ui-sref-active="active">
-				<a href="javascript:;">
-					<i class="ti-bar-chart-alt"></i>
-					<span translate="sidebar.nav.element.REPORTS">Reports</span> <i class="icon-arrow"></i>
+				<li ui-sref-active="active">
+					<a href="javascript:;">
+						<i class="ti-bar-chart-alt"></i>
+						<span translate="sidebar.nav.element.REPORTS">Reports</span> <i class="icon-arrow"></i>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="#" translate="sidebar.nav.users.report1">
+								Report 1
+							</a>
+						</li>
+						<li>
+							<a href="#" translate="sidebar.nav.users.report2">
+								Report 2
+							</a>
+						</li>
+						<li>
+							<a href="#" translate="sidebar.nav.users.report3">
+								Report 3
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<!-- end: MAIN NAVIGATION MENU -->
+		<!-- start: CORE FEATURE -->
+		<div class="navbar-title">
+			<span translate="sidebar.heading.SELF_SERVICE">Self Service</span>
+		</div>
+		<ul class="folders">
+			<li>
+				<a ui-sref="app.pages.messages">
+					<div class="item-content">
+						<div class="item-media">
+							<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-folder-open-o fa-stack-1x fa-inverse"></i> </span>
+						</div>
+						<div class="item-inner">
+							<span class="title" translate="sidebar.nav.pages.MESSAGES"> Messages </span>
+						</div>
+					</div>
 				</a>
-				<ul class="sub-menu">
-					<li>
-						<a href="#" translate="sidebar.nav.users.report1">
-							Report 1
-						</a>
-					</li>
-					<li>
-						<a href="#" translate="sidebar.nav.users.report2">
-							Report 2
-						</a>
-					</li>
-					<li>
-						<a href="#" translate="sidebar.nav.users.report3">
-							Report 3
-						</a>
-					</li>
-				</ul>
 			</li>
 		</ul>
-	</li>
-<!-- end: MAIN NAVIGATION MENU -->
-
-<!-- start: CORE FEATURE -->
-<div class="navbar-title">
-	<span translate="sidebar.heading.SELF_SERVICE">Self Service</span>
-</div>
-<ul class="folders">
-	<li>
-		<a ui-sref="app.pages.messages">
-			<div class="item-content">
-				<div class="item-media">
-					<span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-folder-open-o fa-stack-1x fa-inverse"></i> </span>
-				</div>
-				<div class="item-inner">
-					<span class="title" translate="sidebar.nav.pages.MESSAGES"> Messages </span>
-				</div>
-			</div>
-		</a>
-	</li>
-</ul>
-<!-- end: CORE FEATURE -->
+		<!-- end: CORE FEATURE -->

@@ -120,6 +120,24 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('ngTable', 'ngTableCtrl', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl', 'angularFileUpload')
     })
 
+    //designers
+    .state('app.designers', {
+        url: '/designers',
+        template: '<div ui-view class="fade-in-up"></div>',
+        title: 'Designers',
+        ncyBreadcrumb: {
+            label: 'Designers'
+        }
+    }).state('app.designers.addesigner', {
+        url: '/addesigner',
+        templateUrl: "assets/views/categories/addesigner.html",
+        title: 'New designer',
+        ncyBreadcrumb: {
+            label: 'New Designer'
+        },
+        resolve: loadSequence('ngTable', 'ngTableCtrl', 'ui.select','angularBootstrapNavTree', 'treeCtrl', 'productsCtrl', 'uploadCtrl', 'angularFileUpload')
+    })
+
     //orders
     .state('app.orders', {
         url: '/orders',
