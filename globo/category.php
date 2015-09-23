@@ -53,7 +53,7 @@ if(isset($_GET['id'])){
           <button><i class="fa fa-bars"></i></button>
 
           <ul class="primary-nav list-unstyled">
-            <li class="bg-color"><a href="index.html"><i class="fa fa-home"></i>Home</a>
+            <li class="bg-color"><a href="index.php"><i class="fa fa-home"></i>Home</a>
               <!--<ul>
                 <li><a href="index.html">Home-map(grid)</a></li>
                 <!--<li><a href="home-map-list.html">Home-map(list)</a></li>
@@ -76,8 +76,8 @@ if(isset($_GET['id'])){
 
             </li>-->
 
-            <li><a href="watchoftheday.html"><i class="fa fa-thumbs-o-up"></i>Watch of the day</a></li>
-            <li><a href="shortcodes.html"><i class="fa fa-star"></i>Designer Highlight</a></li>
+            <li><a href="watchoftheday.php"><i class="fa fa-thumbs-o-up"></i>Watch of the day</a></li>
+            <li><a href="shortcodes.php"><i class="fa fa-star"></i>Designer Highlight</a></li>
 
             <!--<li class="">
               <a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -89,9 +89,9 @@ if(isset($_GET['id'])){
 
             </li>
 
-            <li><a href="price-listing.html"><i class="fa fa-truck"></i>We deliver</a></li>
+            <li><a href="price-listing.php"><i class="fa fa-truck"></i>We deliver</a></li>
             <!--<li><a href="about-us.html">About Us</a></li>-->
-            <li><a href="contact-us.html"><i class="fa fa-phone"></i>Contact Us</a></li>
+            <li><a href="contact-us.php"><i class="fa fa-phone"></i>Contact Us</a></li>
           </ul>
         </nav>
       </div> <!-- end .header-nav-bar -->

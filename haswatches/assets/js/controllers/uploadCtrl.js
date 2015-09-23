@@ -2,49 +2,14 @@
 /** 
  * controllers for Angular File Upload
  */
-app.controller('UploadCtrl', ['$scope', 'FileUploader',
-    function($scope, FileUploader) {
+ var base_url = "http://localhost:81/haswatches/globo/";
+
+app.controller('UploadCtrl', ['$scope', '$http', 'FileUploader',
+    function ($scope, $http, FileUploader) {
         var uploaderImages = $scope.uploaderImages = new FileUploader({
-            url: 'http://localhost:81/haswatches/haswatches/assets/database/upload.php',
+            url: base_url + 'upload.php'
             
         });
-
-        $scope.uploader = new FileUploader({
-    url: $scope.uploadUrl,
-    removeAfterUpload: true,
-    onBeforeUploadItem: function (item) {
-        var stuff = {
-            name: $scope.product.name,
-                    category: $scope.product.category,
-                    subcategory: $scope.product.subcategory,
-                    price: $scope.product.price
-        }
-        item.formData.push(stuff);
-    },
-    onSuccessItem: function (item, response, status, headers) {
-
-    },
-    queueLimit: 1,
-});
-
-        /*uploaderImages.addproduct = function(product) {
-            $scope.message = "";
-            url: $scope.uploadUrl,
-            removeAfterUpload: true,
-            onBeforeUploadItem: function(item) {
-                var stuff = {
-                    'name': product.name,
-                    'category': product.category,
-                    'subcategory': product.subcategory,
-                    'price': product.price
-                }
-                item.formData.push(stuff);
-            },
-            onSuccessItem: function(item, response, status, headers) {
-
-            },
-            queueLimit: 1,
-        }*/
 
         // FILTERS
 
@@ -87,12 +52,36 @@ app.controller('UploadCtrl', ['$scope', 'FileUploader',
         };
         uploaderImages.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
+            console.info(response.path);
+            $scope.path =  response.path;
+            console.log($scope.path);
         };
         uploaderImages.onCompleteAll = function() {
             console.info('onCompleteAll');
         };
 
         console.info('uploader', uploaderImages);
+
+        $scope.addproduct = function(product) {
+           var request = $http({
+                    method: "post",
+                    url:base_url + 'upload.php',
+                    data: {
+                        action :'addProduct',
+                        name: product.name,
+                        designerID: product.designer,
+                        categoryID: product.category,
+                        subcategoryID: product.subcategory,
+                        price: product.price,
+                        image: $scope.path
+                    },
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                });
+                /* Check whether the HTTP Request is successful or not. */
+                request.success(function (data) {
+                        console.log(data.answer)
+                                        });
+        }
     }
 ]);
 

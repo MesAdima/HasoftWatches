@@ -217,7 +217,7 @@
                 <select class="" data-placeholder="-Select designer-" name="designer">
                         <?php foreach(getDesigners() as $designer):?>
 
-                                 <option value="<?php echo $designer['name'];?>"><?php echo $designer['name'];?></option>
+                                 <option value="<?php echo $designer['_id'];?>"><?php echo $designer['name'];?></option>
                         <?php endforeach;?>
 
                   
@@ -229,7 +229,7 @@
                     <?php //We display the categories from DB
 
                       foreach(getCategories() as $category):?>
-                            <option value="<?php echo $category['category_name'];?>"><?php echo $category['category_name'];?></option>
+                            <option value="<?php echo $category['_id'];?>"><?php echo $category['category_name'];?></option>
                     <?php endforeach;?>
                   <?php include 'getProducts.php';?>
                 </select>
@@ -241,7 +241,7 @@
                 <select class="" data-placeholder="-Select subcategory-" name="subcategory">
                         <?php foreach(getSubcategories() as $sub):?>
 
-                                 <option value="<?php echo $sub['sub_category_name'];?>"><?php echo $sub['sub_category_name'];?></option>
+                                 <option value="<?php echo $sub['_id'];?>"><?php echo $sub['sub_category_name'];?></option>
                         <?php endforeach;?>
 
                   
@@ -255,3 +255,4 @@
           </div> <!-- END .CONTAINER -->
         </form>
       </div> <!-- END .header-search-bar -->
+      </div>
