@@ -1,5 +1,5 @@
 <?php
-//This is a global PHP INclude section
+
 include 'db/dbConfig.php';
 
 include '/libs/haswatches.lib.php';
@@ -40,29 +40,24 @@ if (isset($_POST['login'])) {
               $username = mysqli_real_escape_string($conn, $username);
               $password = mysqli_real_escape_string($conn, $password);
 
-              // $qry = "SELECT * FROM users WHERE email = '".$email."'";
-              //      $result = mysqli_query($conn,$qry);
-              //      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
               // SQL query to fetch information of registerd users and finds user match.
               $query = "SELECT * from users where username='$username' AND password='$password'";
               $result = mysqli_query($conn,$query);
               $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
               //echo "<pre>";print_r($rows);exit;
               if (mysqli_num_rows($result) == 1) {
-                //echo "true login string"; --> Set sessions
 
               $_SESSION['userArray'] = $rows;
 
               $_SESSION['login_user']=$username; // Initializing Session
 
-              header("location: welcomeuser.php"); // Redirecting To Other Page
+              header("location: index.php"); // Redirecting To Other Page
 
               } else {
                 //echo "false login string";
               $msg[] = "Username or Password is invalid";
 
-              //header("location: http://localhost:81/haswatches/globo/index.php"); // Redirecting To Other Page
+              
               }
     mysqli_close($conn); // Closing Connection
     }
@@ -98,8 +93,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])){
             $activation = md5(uniqid(rand(), true));
 
             $registerquery = mysqli_query($conn, "INSERT INTO users (username, password, email,activationkey) VALUES('".$username."', '".$password."', '".$email."', '".$activation."')")
-            or die(mysqli_error($conn)); //The die is for error detection
-            //Initially showed: Column count doesn't match value count at row 1 -> No Insertion
+            or die(mysqli_error($conn)); 
 
             /*** Script for send email start here ***/
                 $to = $email;
@@ -116,11 +110,11 @@ if(!empty($_POST['username']) && !empty($_POST['password'])){
                     Please click this link to activate your account:<br><br>
                     http://localhost:81/haswatches/globo/index.php?action=activate&key='.$activation.'
                      
-                    '; // Our message above including the link
+                    '; 
                     $headers = 'From:noreply@haswatches.com' . "\r\n"; // Set from headers
                     mail($to, $subject, $body, $headers); // Send our email
                 
-                //This is the new mailer - PHP Mailer Still
+                
                      require_once('libs/mail/class.smtp.php');
                     require_once('libs/mail/class.phpmailer.php');
                       include 'libs/mail/sendmail.php';
@@ -1274,168 +1268,41 @@ $title = 'Home';
         <h2><strong>Featured</strong></h2>
 
 
+        <?php      foreach(getProducts() as $product): //Looping through each of the products?>
+
         <div class="col-md-3 col-sm-4 col-xs-6">
 
           <div class="single-product">
             <figure>
-              <img src="img/content/bluedw.jpg" alt="">
-
+              <img src="uploads/<?php echo $product['image'];?>" alt="">
               <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
+                
 
-                <p>Featured</p>
+                <p>Ksh.<?php echo number_format($product['price']);?> </p>
 
-              </div> <!-- end .rating -->
+              </div>
+              
 
               <figcaption>
-                <div class="bookmark">
-                  <a href="cart.html"  ><i class="fa fa-bookmark-o"></i> Add to Cart</a>
+                <div  class="bookmark" <?php if(!isset($_SESSION['login_user'])):?>onclick="javascript:alert('You must login first. Check topp of the page.');"<?php else:?>
+              onclick="javascript: addToCart(<?php echo $product['_id'];?>);"<?php endif;?>>
+                  <a href="#"  id="addButton_<?php echo $product['_id'];?>"><i class="fa fa-check"></i> Add to Cart </a>
                 </div>
                 <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> See more</a>
+                  <a href="product.php?id=<?php echo $product['_id'];?>"><i class="fa fa-angle-right"></i> See more</a>
                 </div>
 
               </figcaption>
             </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
+            <h4><a href="#"><?php echo $product['category_name'];?></a></h4>
 
-            <h5><a href="#">Grail</a>, <a href="#"></a></h5>
+            <h5><a href="#"><?php echo $product['sub_category_name'];?></a><a href="#"></a></h5>
 
           </div>--> <!-- end .single-product -->
 
         </div>
 
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="img/content/bluedw.jpg" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> <!-- end .rating -->
-
-              <figcaption>
-                <div class="bookmark">
-                  <a href="cart.html"><i class="fa fa-bookmark-o"></i> Add to Cart</a>
-                </div>
-                <div class="read-more">
-                  <a href="cart.html"><i class="fa fa-angle-right"></i> See More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">Old Bookman's</a></h4>
-
-            <h5><a href="#">Fashion</a>, <a href="#"></a></h5>
-
-          </div> <!-- end .single-product -->
-
-        </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="img/content/bluedw.jpg" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> <!-- end .rating -->
-
-              <figcaption>
-                <div class="bookmark">
-                  <a href="cart.html"><i class="fa fa-bookmark-o"></i> Add to Cart</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> See More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">DW Winter Collection</a></h4>
-
-            <h5><a href="#">Fashion</a> <a href="#"></a></h5>
-
-          </div> <!-- end .single-product -->
-
-        </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-          <div class="single-product">
-            <figure>
-              <img src="img/content/bluedw.jpg" alt="">
-
-              <div class="rating">
-                <ul class="list-inline">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                </ul>
-
-                <p>Featured</p>
-
-              </div> <!-- end .rating -->
-
-              <figcaption>
-                <div class="bookmark">
-                  <a href="#"><i class="fa fa-bookmark-o"></i> Add to Cart</a>
-                </div>
-                <div class="read-more">
-                  <a href="#"><i class="fa fa-angle-right"></i> See More</a>
-                </div>
-
-              </figcaption>
-            </figure>
-            <h4><a href="#">DW Fall Collection</a></h4>
-
-            <h5><a href="#">Fashion</a> <a href="#"></a></h5>
-
-          </div> <!-- end .single-product -->
-
-        </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-
-        </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-
-        </div>
-
-        <div class="col-md-3 col-sm-4 col-xs-6">
-
-
-        </div>
+        <?php endforeach;?>
 
       </div>  <!-- end .row -->
 

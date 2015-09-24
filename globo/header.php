@@ -9,6 +9,11 @@
   <title><?php echo $title;?> :: Hasoft Watches</title>
 
   <!-- Stylesheets -->
+  <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+
+  <!-- Haswatches JSL loaded after JQuery-->
+  <script type="text/javascript" src="js/haswatches.js"></script>
+  
   <link rel="stylesheet" href="css/style.css">
   <style>
   .error_response{

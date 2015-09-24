@@ -1,0 +1,19 @@
+- Click on category, takes you to home-map-grind.html
+- The map to be replaced by the earlier page...(the kapart on top)
+
+To be done today
+- Receive ajax requests on haswatches.ajax.php from haswatches.js by using if(isset($_GET[value]))
+- add the product id passed to cart by calling add to cart (addTocart() - PHP)
+- if adding succeeds, encode a response in json and echo.
+
+in cart.php,
+
+- create a html table to show all items currently in my cart (logged in user) and sum the totals section.
+- Thats all.
+
+Not yet done
+- searching products
+- clicking on category to view all the products
+- forgot password link
+
+*Decided to remove welcomeuser.php it was echoing everything from the home page, I thought it was redundant
