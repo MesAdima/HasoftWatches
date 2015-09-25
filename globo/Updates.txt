@@ -1,0 +1,17 @@
+Good Morning mshindaji wa umbrella ya St Pauls :)
+Ni vizuri unajikinga na ElNino, your thin self won't be carried away
+
+What I managed to do:
+- I received the ajax request as you told me and echoed a json, nothing was showing on console
+- Made the products page view on category.php and attempted to display the products, brought that ka error. 
+  I var dumped the array and left there, as I told you there was no internet, I couldn't debug vizuri
+- Click on the categories link of every category on the category.php page, it changes accordingly
+- Somehow I couldn't log in, ata haileti form. Something to do with the header smh
+
+What is left:
+- On cart.php no html table format was created since after logging out I couldn't log in
+- Searching for products on category.php
+- Forgot password
+- This is all that is left according to the marking scheme...the rest are additional points
+
+As you can agree, I made a lot of progress. Thanks for believing in me :)

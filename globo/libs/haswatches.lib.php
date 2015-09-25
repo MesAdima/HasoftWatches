@@ -48,7 +48,7 @@ function getCategory($CategoryID){
 
 function getCategoryProds($CategoryID){
 		global $conn;
-		$get = mysqli_query($conn,"SELECT * FROM products WHERE categoryID = ".$CategoryID."");
+		$get = mysqli_query($conn,"SELECT p.*, c.category_name,sub.sub_category_name FROM products p INNER JOIN categories c on p.categoryID = c._id INNER JOIN subcategories sub ON sub._id = p.subcategoryID WHERE p.categoryID = ".$CategoryID." ORDER BY _id DESC");
 
 		if(mysqli_num_rows($get) > 0){//Category exists
 
@@ -225,5 +225,23 @@ function pageProtect(){
 	}
 	
 	
+}
+
+/**Get number of all products in a certain category
+*/
+
+function getProductNumber($CategoryID){
+		global $conn;
+		$get = mysqli_query($conn,"SELECT COUNT(_id) as number FROM products WHERE categoryID = ".$CategoryID."");
+
+		if(mysqli_num_rows($get) > 0){//Category exists
+
+			$data = mysqli_fetch_assoc($get);
+
+			return $data;
+
+	}else{//Category doesnt exist
+		return false;
+	}
 }
 ?>

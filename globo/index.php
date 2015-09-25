@@ -1284,9 +1284,9 @@ $title = 'Home';
               
 
               <figcaption>
-                <div  class="bookmark" <?php if(!isset($_SESSION['login_user'])):?>onclick="javascript:alert('You must login first. Check topp of the page.');"<?php else:?>
+                <div  class="bookmark" <?php if(!isset($_SESSION['login_user'])):?>onclick="javascript:alert('You must login first. Check top of the page.');"<?php else:?>
               onclick="javascript: addToCart(<?php echo $product['_id'];?>);"<?php endif;?>>
-                  <a href="#"  id="addButton_<?php echo $product['_id'];?>"><i class="fa fa-check"></i> Add to Cart </a>
+                  <a href=""  id="addButton_<?php echo $product['_id'];?>"><i class="fa fa-check"></i> Add to Cart </a>
                 </div>
                 <div class="read-more">
                   <a href="product.php?id=<?php echo $product['_id'];?>"><i class="fa fa-angle-right"></i> See more</a>

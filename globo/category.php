@@ -91,42 +91,6 @@ if(isset($_GET['id'])){
               <?php //We display the categories from DB
 
                       foreach(getCategoryProds($_GET['id']) as $product):?>
-                <!--   
-                <div class="col-md-3 col-sm-4 col-xs-6">
-
-                      <figure>
-                        <img src="img/content/bluedw.jpg" alt="">
-
-                        <div class="rating">
-                          <ul class="list-inline">
-                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
-                            <li><a href="#"><i class="fa fa-star-o"></i></a></li>
-                          </ul>
-
-                          <p>Featured</p>
-
-                        </div> <!-- end .rating --
-
-                        <figcaption>
-                          <div class="bookmark">
-                            <a href="cart.html"  ><i class="fa fa-bookmark-o"></i> Add to Cart</a>
-                          </div>
-                          <div class="read-more">
-                            <a href="#"><i class="fa fa-angle-right"></i> See more</a>
-                          </div>
-
-                        </figcaption>
-                      </figure>
-                      <h4><a href="#"><?php echo $product['name'];?></a></h4>
-
-                      <h5><a href="#"><?php echo $category['category_name'];?></a>, <a href="#"></a></h5>
-
-                    </div>--> <!-- end .single-product --
-
-                  </div>-->
         
              <?php endforeach;?>
        
@@ -136,10 +100,6 @@ if(isset($_GET['id'])){
 
       </div>  <!-- end .row -->
 
-      <div class="discover-more">
-
-        <a class="btn btn-default text-center" href="#"><i class="fa fa-plus-square-o"></i>Discover More</a>
-      </div>
     </div>  <!-- end .container -->
   </div>  <!-- end .featured-listing -->
 
@@ -151,6 +111,163 @@ if(isset($_GET['id'])){
     </div> <!-- END .container-->
   </div> <!-- classifieds-content -->
 
+  <div id="page-content">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-9 col-md-push-3">
+          <div class="page-content">
+
+            <div class="product-details view-switch">
+              <div class="tab-content">
+              <?php $getData = getCategory($_GET['id']);?>
+              <?php $productnumber = getProductNumber($_GET['id'])?>
+
+                              <div class="tab-pane active" id="<?php echo $getData['category_name'];?>">
+                            <h2><?php echo $getData['category_name'];?><span class="category-name"><b>\</b>Category</span><span class="comments"><?php echo $productnumber['number']?></span></h2>
+
+                  <div class="change-view">
+
+                    <div class="filter-input">
+                      <input type="text" placeholder="Filter by Keywords">
+                    </div>
+                    <button class="grid-view active"><i class="fa fa-th"></i></button>
+                    <button class="list-view"><i class="fa fa-bars"></i></button>
+
+                      <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+
+                  </div> <!-- end .change-view -->
+
+                  <div class="row clearfix">
+                  <?php
+                  if(isset($_GET['id'])){
+
+  //Category ID is set, now get category Data
+      $getProdData = getCategoryProds($_GET['id']);
+
+    if(is_array($getProdData)){
+
+     var_dump($getProdData);
+     echo $getProdData['image'];
+    }
+
+
+    //Now get products in this category   ---To be done down in html
+
+
+
+}else{
+
+  echo "shiit";
+} ?>
+                  <?php $getData = getCategoryProds($_GET['id']);?>
+                  <?php //We display the categories from DB
+
+                      foreach($getData as $getProdData):?>
+
+                      <div class="col-sm-4 col-xs-6">
+
+                      <div class="single-product">
+                        <figure>
+                          <img src="uploads/<?php echo $getProdData[1]['image'];?>" alt="">
+
+                          <div class="rating">
+                
+
+                <p>Ksh.<?php echo number_format($getProdData['price']);?> </p>
+
+              </div> <!-- end .rating -->
+
+                          <figcaption>
+                            <div class="bookmark">
+                              <a href="#"  id="addButton_<?php echo $getProdData['_id'];?>"><i class="fa fa-check"></i> Add to Cart </a>
+                            </div>
+
+                            <div class="read-more">
+                              <a href="product.php?id=<?php echo $getProdData['_id'];?>"><i class="fa fa-angle-right"></i> See more</a>
+                            </div>
+
+                          </figcaption>
+                        </figure>
+
+                        <h4><a href="#"><?php echo $getProdData['category_name'];?></a></h4>
+
+            <h5><a href="#"><?php echo $getProdData['sub_category_name'];?></a><a href="#"></a></h5>
+
+
+
+                      </div> <!-- end .single-product -->
+                    </div> <!-- end .col-sm-4 grid layout -->
+        
+             <?php endforeach;?>
+                    
+
+                    
+
+                    <div class="pagination-center">
+
+                      <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+
+                    </div>
+
+                  </div> <!-- end .row -->
+                </div> <!-- end .tabe-pane -->
+                        
+
+                
+
+              </div> <!-- end .tabe-content -->
+
+
+            </div> <!-- end .product-details -->
+          </div> <!-- end .page-content -->
+        </div>
+
+        <div class="col-md-3 col-md-pull-9 category-toggle">
+          <button><i class="fa fa-briefcase"></i></button>
+
+          <div class="page-sidebar">
+
+            <!-- Category accordion -->
+            <div id="categories">
+              <div class="accordion">
+                <ul class="nav nav-tabs accordion-tab" role="tablist">
+
+                  <li class="active">
+                    <a href="#" role="tab" data-toggle="tab"><i class="fa fa-star-o"></i>All Categories</a>
+                    <?php //We display the categories from DB
+
+                          foreach(getCategories() as $category):?>
+
+                              <div >
+                                  <a href="#<?php echo $category['category_name'];?>"role="tab" data-toggle="tab"><?php echo $category['category_name'];?></a>
+                               
+                              </div>
+                        <?php endforeach;?>
+                    
+                  </li>
+                </ul>
+              </div> <!-- end .accordion -->
+            </div> <!-- end #categories -->
+
+
+          </div> <!-- end .page-sidebar -->
+        </div> <!-- end grid layout-->
+      </div> <!-- end .row -->
+    </div> <!-- end .container -->
+  </div>  <!-- end #page-content -->
 
     </div>
     <!-- END .REGISTRATION-DETAILS -->
