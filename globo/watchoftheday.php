@@ -253,7 +253,7 @@
         </nav>
       </div> <!-- end .container -->
     </div> <!-- end .header-nav-bar -->
-  </header> <!-- end #header -->
+
 
   <div id="page-content">
     <div class="container">

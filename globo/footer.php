@@ -36,8 +36,8 @@
                 <span></span> <!-- This content for overlay effect -->
               </div>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue,
-                suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem.</p>
+              <p>We sell watches and help you keep time, in style! Look good and feel good
+              through every product we have on our site</p>
 
             </div> <!-- End .about-globo -->
           </div> <!-- end Grid layout-->
@@ -49,12 +49,12 @@
               <div class="post-image">
                 <img src="img/content/latest_post_1.jpg" alt="">
 
-                <p><span>12</span>Sep</p>
+                <p><span>20</span>Sep</p>
               </div>
 
               <h4><a href="#">Bloom in Style!</a></h4>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>El nino rains are coming up. Keep time, don't be rained on</p>
             </div>
 
             <div class="latest-post clearfix">
@@ -66,7 +66,7 @@
 
               <h4><a href="#">Hey Hey Mr DJ</a></h4>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>Pull up a tune while I dazzle the ladies with my new watch.</p>
             </div>
           </div> <!-- end Grid layout-->
 
@@ -75,11 +75,11 @@
               <h3>Popular Categories</h3>
 
               <ul>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i>E-commerce</a></li>
-                <li><a href="#"><i class="fa fa-paper-plane-o"></i>Entertainment</a></li>
-                <li><a href="#"><i class="fa fa-cogs"></i>Industry</a></li>
-                <li><a href="#"><i class="fa fa-book"></i>Libraries &amp; Public Office</a></li>
-                <li><a href="#"><i class="fa fa-building-o"></i>Real Estate</a></li>
+                <li><a href="#"><i class="fa fa-futbol-o"></i>Sport</a></li>
+                <li><a href="#"><i class="fa fa-play"></i>Digital</a></li>
+                <li><a href="#"><i class="fa fa-clock-o"></i>Vintage</a></li>
+                <li><a href="#"><i class="fa fa-clock-o"></i>Wrist</a></li>
+                <li><a href="#"><i class="fa fa-apple"></i>Smart</a></li>
               </ul>
             </div> <!-- end .popular-categories-->
           </div> <!-- end Grid layout-->
@@ -96,10 +96,8 @@
               <h3>Keep In Touch</h3>
 
               <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
               </ul>
             </div> <!-- end .newsletter-->
 
@@ -110,15 +108,12 @@
 
     <div class="copyright">
       <div class="container">
-        <p>Copyright 2014 &copy; globo. All rights reserved. Powered by  <a href="#">Uouapps</a></p>
+        <p>Copyright 2015 &copy; hasoft. All rights reserved. Powered by  <a href="#">Strathmore Uni</a></p>
 
         <ul class="list-inline">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Shortcodes</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="about.php">About Us</a></li>
+          <li><a href="contact-us.php">Contact</a></li>
         </ul>
       </div> <!-- END .container -->
     </div> <!-- end .copyright-->

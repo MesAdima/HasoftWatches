@@ -49,16 +49,9 @@ function getCategory($CategoryID){
 function getCategoryProds($CategoryID){
 		global $conn;
 		$get = mysqli_query($conn,"SELECT p.*, c.category_name,sub.sub_category_name FROM products p INNER JOIN categories c on p.categoryID = c._id INNER JOIN subcategories sub ON sub._id = p.subcategoryID WHERE p.categoryID = ".$CategoryID." ORDER BY _id DESC");
-
-		if(mysqli_num_rows($get) > 0){//Category exists
-
-			$data = mysqli_fetch_assoc($get);
-
-			return $data;
-
-	}else{//Category doesnt exist
-		return false;
-	}
+		$data = mysqli_fetch_all($get);
+		return $data;
+	
 }
 
 /**Function to get designers
@@ -140,16 +133,16 @@ if(mysqli_num_rows($get) > 0){
 
 
 /**Add to cart function**/
-	function addtocart($productID){ 
+	function addtocart($productID,$userID){ 
 			global $conn;		
 
 
 			$data = getProduct($productID);//Done
 
-			$total = $data['price'] * $data['quantity'] ;
+			$total = $data['price'] ; //here we assume Qty is 1
 
 		
-		$add = mysqli_query($conn, "INSERT INTO cart(userID, productID, quantity, price, total) VALUES ('".$_SESSION['userArray']['_id']."','".$data['productID']."','".$data['quantity']."','".$data['price']."','".$total."')");
+		$add = mysqli_query($conn, "INSERT INTO cart(userID, productID, quantity, price, total) VALUES ('".$userID."','".$productID."',1,'".$data['price']."','".$total."')");
 
 		if($add){
 			return true; 
@@ -165,11 +158,11 @@ if(mysqli_num_rows($get) > 0){
 * 
 * @return
 */
-function removeFromCart($productID){ //Removes a given product from the current users' cart
+function removeFromCart($productID,$user){ //Removes a given product from the current users' cart
 	
 	global $conn;
 	
-	$delete = mysqli_query($conn,"DELETE FROM cart WHERE userID = ".$_SESSION['userArray']['_id']." AND productID = ".$productID."");
+	$delete = mysqli_query($conn,"DELETE FROM cart WHERE userID = ".$user." AND productID = ".$productID."");
 	
 	if($delete){
 		return true;
@@ -201,11 +194,12 @@ function updateCart($productID,$qty){
 * 
 * @return
 */
-function updateCartTotals(){
+function updateCartTotals($user){
 	
 	global $conn;
 	
-	$update = mysqli_query($conn,"UPDATE table cart SET total = quantity * price WHERE userID = ".$_SESSION['userArray']['_id']."");
+
+	$update = mysqli_query($conn,"UPDATE cart SET total = (quantity * price) WHERE userID = ".$user."");
 	
 	if($update){
 		return true;
@@ -241,6 +235,108 @@ function getProductNumber($CategoryID){
 			return $data;
 
 	}else{//Category doesnt exist
+		return false;
+	}
+}
+
+/**Get CArt Data
+*/
+
+function getCart(){
+	global $conn;
+
+	$get = mysqli_query($conn,"SELECT p.name,c.* FROM products p INNER JOIN cart C ON p._id = c.productID WHERE c.userID = ".$_SESSION['userArray']['_id'].""); //Lets try this sessions
+
+	if(mysqli_num_rows($get) > 0){
+
+		while($item = mysqli_fetch_assoc($get)){
+
+			$items[] = $item;
+ 		}
+
+ 		return $items;
+
+	}else{
+		return false;
+	}
+
+}
+
+/**Function to sum total of a cart
+*/
+
+function sumCart($user){
+
+	global $conn;
+
+	$sum = mysqli_query($conn,"SELECT SUM(total) as Total from cart WHERE userID =".$user." ");
+
+	$sum = mysqli_fetch_assoc($sum);
+
+	return $sum['Total'];
+}
+
+
+/*****CHECK OUT SECTION**
+*PLATFORM SIMULATED: MPESA.
+*PROCEDURE:
+		*USer Adds products to cart.
+		*User Edits cart as appropriate if necessary & updates cart.
+		*User Clicks Check out.
+		*User is prompted to pay via MPESA and insert transaction code. 
+			*NB: Shipping Address is assumed already added in user profile.
+		__SIMULATION_  
+						*Admin ads sample transaction code to DB & Amount.
+		*User enters the transaction code.
+		*Verification is done to see if code exists and if the amount is equal to cart total amount
+		*Relevant response shown and if success, user is redirected to home page/Thank you page.
+				
+
+
+**/
+
+/**Functin Auths Checkout params
+*/
+
+function checkoutUser($transactionID,$user){
+
+	global $conn;
+
+	$check = mysqli_query($conn,"SELECT id FROM payments WHERE transactionID = '".$transactionID."' AND amountPaid= ".sumCart($user)."") or die(mysqli_error($conn));
+
+	if(mysqli_num_rows($check) > 0){
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
+function getCartItemData($productID,$userID){
+
+	global $conn;
+
+	$check = mysqli_query($conn,"SELECT * FROM cart WHERE productID =".$productID." AND userID =".$userID."");
+	if(mysqli_num_rows($check)> 0){
+		$data = mysqli_fetch_assoc($check);
+
+		return $data;
+	}else{
+		return false;
+	}
+}
+
+
+function addQty($productID,$user){
+	global $conn;
+
+	$add= mysqli_query($conn,"UPDATE cart SET quantity = quantity + 1 WHERE productID = ".$productID." AND userID = ".$user."");
+	if($add){
+		$itemData= getCartItemData($productID,$user);
+
+		return $itemData['quantity'];
+
+	}else{
 		return false;
 	}
 }

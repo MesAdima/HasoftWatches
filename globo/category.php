@@ -123,8 +123,8 @@ if(isset($_GET['id'])){
               <?php $getData = getCategory($_GET['id']);?>
               <?php $productnumber = getProductNumber($_GET['id'])?>
 
-                              <div class="tab-pane active" id="<?php echo $getData['category_name'];?>">
-                            <h2><?php echo $getData['category_name'];?><span class="category-name"><b>\</b>Category</span><span class="comments"><?php echo $productnumber['number']?></span></h2>
+                  <div class="tab-pane active" id="<?php echo $getData['category_name'];?>">
+                  <h2><?php echo $getData['category_name'];?><span class="category-name"><b>\</b>Category</span><span class="comments"><?php echo ' '.$productnumber['number'].' products'?></span></h2>
 
                   <div class="change-view">
 
@@ -147,58 +147,45 @@ if(isset($_GET['id'])){
                   <div class="row clearfix">
                   <?php
                   if(isset($_GET['id'])){
-
-  //Category ID is set, now get category Data
-      $getProdData = getCategoryProds($_GET['id']);
-
-    if(is_array($getProdData)){
-
-     var_dump($getProdData);
-     echo $getProdData['image'];
-    }
-
-
-    //Now get products in this category   ---To be done down in html
-
-
-
-}else{
-
-  echo "shiit";
-} ?>
+                  //Category ID is set, now get category Data
+                  $getProdData = getCategoryProds($_GET['id']);
+                  } ?>
                   <?php $getData = getCategoryProds($_GET['id']);?>
                   <?php //We display the categories from DB
 
-                      foreach($getData as $getProdData):?>
-
+                      foreach($getProdData as $getProd):?>
+                      <?php //echo "<pre>";print_r($getProd); ?>
                       <div class="col-sm-4 col-xs-6">
 
                       <div class="single-product">
                         <figure>
-                          <img src="uploads/<?php echo $getProdData[1]['image'];?>" alt="">
+                          <img src="uploads/<?php echo $getProd[6];?>" alt="">
 
                           <div class="rating">
                 
 
-                <p>Ksh.<?php echo number_format($getProdData['price']);?> </p>
+                <p>Ksh.<?php echo number_format($getProd[5]);//price?> </p>
 
               </div> <!-- end .rating -->
 
                           <figcaption>
                             <div class="bookmark">
-                              <a href="#"  id="addButton_<?php echo $getProdData['_id'];?>"><i class="fa fa-check"></i> Add to Cart </a>
+                              <a href="#"  id="addButton_<?php echo $getProd[0];?>"><i class="fa fa-check"></i> Add to Cart </a>
+                              <!-- the above index is for product id -->
                             </div>
 
                             <div class="read-more">
-                              <a href="product.php?id=<?php echo $getProdData['_id'];?>"><i class="fa fa-angle-right"></i> See more</a>
+                              <a href="product.php?id=<?php echo $getProd[0];?>"><i class="fa fa-angle-right"></i> See more</a>
+                              <!-- the above index is for product id -->
                             </div>
 
                           </figcaption>
                         </figure>
 
-                        <h4><a href="#"><?php echo $getProdData['category_name'];?></a></h4>
+                        <h4><a href="#"><?php echo $getProd[7];//main category name?></a></h4>
+                              <!-- the above index is for product id -->
 
-            <h5><a href="#"><?php echo $getProdData['sub_category_name'];?></a><a href="#"></a></h5>
+            <h5><a href="#"><?php echo $getProd[8];//sub category name?></a><a href="#"></a></h5>
 
 
 
@@ -206,10 +193,7 @@ if(isset($_GET['id'])){
                     </div> <!-- end .col-sm-4 grid layout -->
         
              <?php endforeach;?>
-                    
-
-                    
-
+             
                     <div class="pagination-center">
 
                       <ul class="pagination">
