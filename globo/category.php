@@ -168,18 +168,16 @@ if(isset($_GET['id'])){
 
               </div> <!-- end .rating -->
 
-                          <figcaption>
-                            <div class="bookmark">
-                              <a href="#"  id="addButton_<?php echo $getProd[0];?>"><i class="fa fa-check"></i> Add to Cart </a>
-                              <!-- the above index is for product id -->
-                            </div>
+              <figcaption>
+                <div  class="bookmark" <?php if(!isset($_SESSION['login_user'])):?>onclick="javascript:alert('You must login first. Check top of the page.');"<?php else:?>
+              onclick="javascript: addToCart(<?php echo $getProd[0];?>,<?php echo $_SESSION['userArray']['_id'];?>);"<?php endif;?>>
+                  <a href="#"  id="addButton_<?php echo $getProd[0];?>"><i class="fa fa-check"></i> Add to Cart </a>
+                </div>
+                <div class="read-more">
+                  <a href="product.php?id=<?php echo $getProd[0];?>"><i class="fa fa-angle-right"></i> See more</a>
+                </div>
 
-                            <div class="read-more">
-                              <a href="product.php?id=<?php echo $getProd[0];?>"><i class="fa fa-angle-right"></i> See more</a>
-                              <!-- the above index is for product id -->
-                            </div>
-
-                          </figcaption>
+              </figcaption>
                         </figure>
 
                         <h4><a href="#"><?php echo $getProd[7];//main category name?></a></h4>

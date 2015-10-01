@@ -24,15 +24,16 @@ if(isset($_GET['action']) && $_GET['action'] == 'activate'){
 
 */
 
-if (isset($_POST['login'])) {
-    if (empty($_POST['username']) || empty($_POST['pass'])) {
+if (isset($_POST['login'])  || isset($_GET['brutforce'])) {
+    if (!isset($_GET['brutforce'])) { 
+      //Return afer brutforce empty($_POST['username']) || empty($_POST['pass'])
            $msg[] = "Username or Password is invalid";
     }
     else
     {
               // Define $username and $password
-              $username=$_POST['username'];
-              $password=md5($_POST['pass']);
+              $username= $_GET['username'] ;  //$_POST['username'];
+              $password=  md5($_GET['pass']) ; //md5($_POST['pass']);
 
               // To protect MySQL injection for Security purpose
               $username = stripslashes($username);
@@ -51,7 +52,13 @@ if (isset($_POST['login'])) {
 
               $_SESSION['login_user']=$username; // Initializing Session
 
-              header("location: index.php"); // Redirecting To Other Page
+                  if($_SESSION['userArray']['usertypeID'] == 1){
+                              $_SESSION[adminLogged] = 1;
+                              header("location: http://localhost:81/haswatches/haswatches/#/app/dashboard"); // Redirecting To Other Page
+                  }else{
+                    header("location: index.php"); // Redirecting To Other Page
+                  }
+              
 
               } else {
                 //echo "false login string";

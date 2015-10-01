@@ -32,6 +32,10 @@
 </head>
 
 <body>
+<?php if(isset($_GET['logged'])):?>
+  <?php $msg[] ="Please login first to access that page";?>
+
+<?php endif;?>
 <div class="error_response">
   <?php if(!empty($msg)){
     foreach($msg as $m){
@@ -65,6 +69,9 @@
                   <input type="text" class="form-control" placeholder="Username" required="required" name="username">
                   <input type="password" class="form-control" placeholder="Password" name="pass" required="required" name="pass">
                   <input type="submit" name="login" class="btn btn-default" value="Login">
+                </form>
+              </div>
+            </div>
         <!-- HEADER REGISTER -->
         
         <div class="header-register">
